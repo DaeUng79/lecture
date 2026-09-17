@@ -46,7 +46,7 @@
     width:40px;height:40px;border-radius:12px;cursor:pointer
   }
   .icon-btn:hover{background:rgba(255,255,255,.16)}
-  .stage{position:relative;flex:1;min-height:0}
+  .stage{position:relative;flex:1;min-height:0;perspective:3200px;transform-style:preserve-3d}
   .slide{
     position:absolute;inset:0;overflow:auto;padding:54px clamp(20px,5vw,80px) 90px;
     display:none;scroll-behavior:smooth;
@@ -54,6 +54,7 @@
       radial-gradient(circle at 85% 10%, rgba(18,112,90,.10), transparent 24%),
       radial-gradient(circle at 10% 90%, rgba(231,165,61,.10), transparent 22%),
       var(--paper);
+    transform-style:preserve-3d;
   }
   .slide.active{display:block;animation:enter .55s cubic-bezier(.2,.8,.2,1)}
   @keyframes enter{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
@@ -72,9 +73,9 @@
   .hero-card{
     background:rgba(255,255,255,.82);
     border:1px solid #b8d4c8;border-radius:28px;padding:26px;box-shadow:var(--shadow);
-    transform:perspective(900px) rotateY(-5deg);transition:.4s ease
+    transform:perspective(900px) rotateY(-14deg) rotateX(8deg) translateZ(18px);transition:.4s ease
   }
-  .hero-card:hover{transform:perspective(900px) rotateY(0deg) translateY(-4px)}
+  .hero-card:hover{transform:perspective(900px) rotateY(-6deg) rotateX(4deg) translateY(-4px) translateZ(24px)}
   .pulse{animation:pulse 3.8s infinite ease-in-out}
   @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(18,112,90,.16)}50%{box-shadow:0 0 0 13px rgba(18,112,90,0)}}
   .mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
@@ -289,18 +290,18 @@
     </div>
   </header>
 
-  <main class="stage" id="stage">
+  <main class="stage" id="stage" style="perspective:1800px; transform-style:preserve-3d;">
 
     <!-- 1 -->
-    <section class="slide active" data-title="Intro">
-      <div class="hero">
+    <section class="slide active" data-title="Intro" style="perspective:3200px; transform-style:preserve-3d;">
+      <div class="hero" style="transform-style:preserve-3d;">
         <div>
           <div class="eyebrow">PUBLIC OFFICIAL / QUICK GUIDE</div>
           <h1>외부강의,<br><span class="accent">가기 전에 꼭</span> 확인하세요.</h1>
           <p class="lead">외부강의등의 해당 여부부터 신고, 횟수·시간, 사례금, 초과사례금 처리까지 <b>출강 전 꼭 확인할 핵심 포인트</b>를 한 화면씩 빠르게 확인할 수 있도록 구성했습니다.</p>
           <div class="notice">※ 이 자료는 제공하신 안내문을 기준으로 정리한 실무용 화면입니다. 실제 신고 전에는 <b>현행 법령·양산시 행동강령·기관 내부지침</b>을 최종 확인하세요.</div>
         </div>
-        <div class="hero-card pulse">
+        <div class="hero-card pulse" style="transform:perspective(900px) rotateY(-26deg) rotateX(16deg) translateZ(54px); box-shadow:0 42px 110px rgba(18,51,43,.24), 0 18px 36px rgba(18,51,43,.12);">
           <div class="kicker">오늘 기억할 숫자</div>
           <div class="mini-grid">
             <div class="mini"><b class="counter" data-target="10">0</b><span>신고 기한(일)</span></div>
@@ -317,7 +318,7 @@
     </section>
 
     <!-- 2 -->
-    <section class="slide" data-title="정의">
+    <section class="slide" data-title="정의" style="perspective:3200px; transform-style:preserve-3d;">
       <div class="split-title">
         <div>
           <div class="eyebrow">01 / DEFINITION</div>
@@ -327,7 +328,7 @@
       </div>
 
       <div class="grid cols2">
-        <div class="glass">
+        <div class="glass" style="transform:perspective(900px) rotateY(18deg) rotateX(4deg) translateZ(26px); box-shadow:0 42px 110px rgba(18,51,43,.22), 0 18px 36px rgba(18,51,43,.10);">
           <div class="card-title"><span class="tag">핵심</span>외부강의등의 의미</div>
           <p class="quote">직무 관련성 또는 지위·직책에서 유래되는 영향력을 통해 요청받은 <mark>강의·강연·기고 등</mark></p>
           <div class="checklist" style="margin-top:18px">
@@ -337,7 +338,7 @@
           </div>
         </div>
 
-        <div class="glass">
+        <div class="glass" style="transform:perspective(900px) rotateY(-18deg) rotateX(4deg) translateZ(26px); box-shadow:0 42px 110px rgba(18,51,43,.22), 0 18px 36px rgba(18,51,43,.10);">
           <div class="card-title"><span class="tag">CHECK</span>이런 경우는 외부강의등이 아님</div>
           <div class="checklist">
             <div class="check"><div class="dot"></div><div><b>겸직허가를 받은 학교 출강</b><span>허가받은 범위 내에서 겸직 직무 수행</span></div></div>
@@ -353,7 +354,7 @@
     </section>
 
     <!-- 3 -->
-    <section class="slide" data-title="신고">
+    <section class="slide" data-title="신고" style="perspective:3200px; transform-style:preserve-3d;">
       <div class="split-title">
         <div>
           <div class="eyebrow">02 / REPORT</div>
@@ -363,46 +364,46 @@
       </div>
 
       <div class="number-row">
-        <div class="number-box">
+        <div class="number-box" style="transform:perspective(900px) rotateX(14deg) rotateY(-10deg) translateZ(22px); box-shadow:0 36px 80px rgba(18,51,43,.20), 0 14px 28px rgba(18,51,43,.10);">
           <div class="value"><span class="counter" data-target="10">0</span><span class="unit">일</span></div>
           <p>외부강의등을 마친 날부터 신고 가능 기간</p>
         </div>
-        <div class="number-box">
+        <div class="number-box" style="transform:perspective(900px) rotateX(14deg) translateZ(34px); box-shadow:0 36px 80px rgba(18,51,43,.20), 0 14px 28px rgba(18,51,43,.10);">
           <div class="value"><span class="counter" data-target="0">0</span><span class="unit">원</span></div>
           <p>사례금을 받지 않는 외부강의등 → 신고 의무 없음</p>
         </div>
-        <div class="number-box">
+        <div class="number-box" style="transform:perspective(900px) rotateX(14deg) rotateY(10deg) translateZ(46px); box-shadow:0 36px 80px rgba(18,51,43,.20), 0 14px 28px rgba(18,51,43,.10);">
           <div class="value"><span class="counter" data-target="0">0</span><span class="unit">건</span></div>
           <p>국가·지방자치단체 요청 → 신고대상에서 제외</p>
         </div>
       </div>
 
       <div class="flow">
-        <div class="step">
+        <div class="step" style="transform:perspective(900px) rotateY(24deg) rotateX(4deg) translateZ(18px); box-shadow:0 34px 76px rgba(18,51,43,.18), 0 14px 28px rgba(18,51,43,.10);">
           <div class="no">STEP 01</div><h3>사례금이 있는가?</h3>
           <p>없음 → 행동강령상 신고의무 없음.<br>있음 → 다음 단계로.</p>
         </div>
         <div class="arrow">→</div>
-        <div class="step">
+        <div class="step" style="transform:perspective(900px) rotateY(8deg) rotateX(4deg) translateZ(30px); box-shadow:0 34px 76px rgba(18,51,43,.18), 0 14px 28px rgba(18,51,43,.10);">
           <div class="no">STEP 02</div><h3>요청자가 국가·지자체인가?</h3>
           <p>맞음 → 신고대상 제외.<br>아니오 → 신고 필요.</p>
         </div>
         <div class="arrow">→</div>
-        <div class="step">
+        <div class="step" style="transform:perspective(900px) rotateY(-8deg) rotateX(4deg) translateZ(42px); box-shadow:0 34px 76px rgba(18,51,43,.18), 0 14px 28px rgba(18,51,43,.10);">
           <div class="no">STEP 03</div><h3>신고 시점 확인</h3>
           <p>기본적으로 마친 날부터 10일 이내.<br>사전에 구체적 내용을 아는 경우 사전신고 가능.</p>
         </div>
       </div>
 
       <div class="grid cols2" style="margin-top:18px">
-        <div class="glass">
+        <div class="glass" style="transform:perspective(900px) rotateY(16deg) rotateX(4deg) translateZ(24px); box-shadow:0 42px 110px rgba(18,51,43,.22), 0 18px 36px rgba(18,51,43,.10);">
           <div class="card-title">새올 신고 흐름</div>
           <p style="color:#c4cde0;line-height:1.8;margin:0">
             <b>새올 → 감사 → 외부강의등 → 외부강의등신고목록 → 추가</b><br>
             요청기관 공문 + 외부강의 신고서 첨부하여 감사담당관실에 공문 신고
           </p>
         </div>
-        <div class="glass warn">
+        <div class="glass warn" style="transform:perspective(900px) rotateY(-16deg) rotateX(4deg) translateZ(24px); box-shadow:0 42px 110px rgba(18,51,43,.22), 0 18px 36px rgba(18,51,43,.10);">
           <div class="card-title">미리 모르는 정보가 있다면?</div>
           <p style="color:#d9d4bc;line-height:1.8;margin:0">
             사례금 총액·상세 명세 등을 알 수 없다면 우선 아는 사항을 신고하고,
@@ -413,7 +414,7 @@
     </section>
 
     <!-- 4 -->
-    <section class="slide" data-title="기관범위">
+    <section class="slide" data-title="기관범위" style="perspective:3200px; transform-style:preserve-3d;">
       <div class="split-title">
         <div>
           <div class="eyebrow">03 / REQUESTER</div>
@@ -423,18 +424,18 @@
       </div>
 
       <div class="number-row institution-stats">
-        <div class="number-box">
+        <div class="number-box" style="transform:perspective(900px) rotateX(14deg) rotateY(-8deg) translateZ(20px); box-shadow:0 36px 80px rgba(18,51,43,.20), 0 14px 28px rgba(18,51,43,.10);">
           <div class="value"><span class="counter" data-target="17">0</span><span class="unit">개</span></div>
           <p>시·도교육청</p>
         </div>
-        <div class="number-box">
+        <div class="number-box" style="transform:perspective(900px) rotateX(14deg) rotateY(8deg) translateZ(34px); box-shadow:0 36px 80px rgba(18,51,43,.20), 0 14px 28px rgba(18,51,43,.10);">
           <div class="value"><span class="counter" data-target="2">0</span><span class="unit">범주</span></div>
           <p>국가기관 / 지방자치단체·교육청</p>
         </div>
       </div>
 
       <div class="grid cols2">
-        <div class="glass">
+        <div class="glass" style="transform:perspective(900px) rotateY(18deg) rotateX(4deg) translateZ(22px); box-shadow:0 42px 110px rgba(18,51,43,.22), 0 18px 36px rgba(18,51,43,.10);">
           <div class="card-title"><span class="tag">국가기관</span>대표 범위</div>
           <div class="law-list">
             <div class="law"><strong>헌법기관</strong><span>국회 · 법원 · 헌법재판소 · 선거관리위원회 · 감사원</span></div>
@@ -444,7 +445,7 @@
           </div>
         </div>
 
-        <div class="glass">
+        <div class="glass" style="transform:perspective(900px) rotateY(-18deg) rotateX(4deg) translateZ(22px); box-shadow:0 42px 110px rgba(18,51,43,.22), 0 18px 36px rgba(18,51,43,.10);">
           <div class="card-title"><span class="tag">지방</span>지방자치단체·교육청</div>
           <div class="law-list">
             <div class="law"><strong>지방자치단체</strong><span>광역자치단체 · 기초자치단체 · 지방의회 및 해당 행정기구</span></div>
@@ -455,7 +456,7 @@
         </div>
       </div>
 
-      <div class="glass danger" style="margin-top:18px">
+      <div class="glass danger" style="margin-top:18px; transform:perspective(900px) rotateX(10deg) translateZ(30px); box-shadow:0 42px 110px rgba(18,51,43,.22), 0 18px 36px rgba(18,51,43,.10);">
         <div class="card-title">⚠ 주의: 공공기관·공직유관단체</div>
         <p style="color:#f0c9c9;line-height:1.7;margin:0">
           요청기관이 「공직자윤리법」상 공직유관단체 또는 「공공기관의 운영에 관한 법률」상 공공기관이라면
@@ -465,7 +466,7 @@
     </section>
 
     <!-- 5 -->
-    <section class="slide" data-title="제한">
+    <section class="slide" data-title="제한" style="perspective:3200px; transform-style:preserve-3d;">
       <div class="split-title">
         <div>
           <div class="eyebrow">04 / LIMITS</div>
@@ -475,14 +476,14 @@
       </div>
 
       <div class="tip-grid">
-        <div class="tip"><b>월 횟수</b><strong><span class="counter" data-target="3">0</span>회</strong><span>대가를 받는 외부강의등</span></div>
-        <div class="tip"><b>월 시간</b><strong><span class="counter" data-target="6">0</span>시간</strong><span>양산시 자료 기준</span></div>
-        <div class="tip"><b>1시간 상한</b><strong><span class="counter" data-target="40">0</span>만원</strong><span>제공자료 기준</span></div>
-        <div class="tip"><b>총액 상한</b><strong><span class="counter" data-target="60">0</span>만원</strong><span>1시간 초과 강의 등</span></div>
+        <div class="tip" style="transform:perspective(900px) rotateY(24deg) rotateX(6deg) translateZ(18px); box-shadow:0 34px 76px rgba(18,51,43,.16), 0 14px 28px rgba(18,51,43,.08);"><b>월 횟수</b><strong><span class="counter" data-target="3">0</span>회</strong><span>대가를 받는 외부강의등</span></div>
+        <div class="tip" style="transform:perspective(900px) rotateY(10deg) rotateX(6deg) translateZ(30px); box-shadow:0 34px 76px rgba(18,51,43,.16), 0 14px 28px rgba(18,51,43,.08);"><b>월 시간</b><strong><span class="counter" data-target="6">0</span>시간</strong><span>양산시 자료 기준</span></div>
+        <div class="tip" style="transform:perspective(900px) rotateY(-10deg) rotateX(6deg) translateZ(30px); box-shadow:0 34px 76px rgba(18,51,43,.16), 0 14px 28px rgba(18,51,43,.08);"><b>1시간 상한</b><strong><span class="counter" data-target="40">0</span>만원</strong><span>제공자료 기준</span></div>
+        <div class="tip" style="transform:perspective(900px) rotateY(-24deg) rotateX(6deg) translateZ(18px); box-shadow:0 34px 76px rgba(18,51,43,.16), 0 14px 28px rgba(18,51,43,.08);"><b>총액 상한</b><strong><span class="counter" data-target="60">0</span>만원</strong><span>1시간 초과 강의 등</span></div>
       </div>
 
       <div class="grid cols2" style="margin-top:18px">
-        <div class="glass">
+        <div class="glass" style="transform:perspective(900px) rotateY(16deg) rotateX(4deg) translateZ(24px); box-shadow:0 42px 110px rgba(18,51,43,.22), 0 18px 36px rgba(18,51,43,.10);">
           <div class="card-title"><span class="tag">횟수·시간</span>초과하려면?</div>
           <div class="checklist">
             <div class="check"><div class="dot"></div><div><b>월 3회 또는 월 6시간 초과</b><span>대가를 받고 수행하려면 사전에 행동강령책임관의 승인을 받는 기준으로 안내</span></div></div>
@@ -491,7 +492,7 @@
           </div>
         </div>
 
-        <div class="glass">
+        <div class="glass" style="transform:perspective(900px) rotateY(-16deg) rotateX(4deg) translateZ(24px); box-shadow:0 42px 110px rgba(18,51,43,.22), 0 18px 36px rgba(18,51,43,.10);">
           <div class="card-title"><span class="tag">사례금</span>여기까지가 상한</div>
           <div class="checklist">
             <div class="check"><div class="dot"></div><div><b>1시간 기준 40만원</b><span>강의 등의 1시간 상한액으로 안내된 금액</span></div></div>
@@ -506,7 +507,7 @@
     </section>
 
     <!-- 6 -->
-    <section class="slide" data-title="초과사례금">
+    <section class="slide" data-title="초과사례금" style="perspective:3200px; transform-style:preserve-3d;">
       <div class="split-title">
         <div>
           <div class="eyebrow">05 / EXCESS PAYMENT</div>
@@ -516,35 +517,35 @@
       </div>
 
       <div class="number-row">
-        <div class="number-box">
+        <div class="number-box" style="transform:perspective(900px) rotateX(14deg) rotateY(-8deg) translateZ(20px); box-shadow:0 36px 80px rgba(18,51,43,.20), 0 14px 28px rgba(18,51,43,.10);">
           <div class="value"><span class="counter" data-target="2">0</span><span class="unit">일</span></div>
           <p>초과사례금을 받은 사실을 안 날부터 신고</p>
         </div>
-        <div class="number-box">
+        <div class="number-box" style="transform:perspective(900px) rotateX(14deg) rotateY(8deg) translateZ(34px); box-shadow:0 36px 80px rgba(18,51,43,.20), 0 14px 28px rgba(18,51,43,.10);">
           <div class="value"><span class="counter" data-target="7">0</span><span class="unit">일</span></div>
           <p>행동강령책임관이 반환액 산정·통지하는 기간</p>
         </div>
       </div>
 
       <div class="flow">
-        <div class="step">
+        <div class="step" style="transform:perspective(900px) rotateY(24deg) rotateX(4deg) translateZ(18px); box-shadow:0 34px 76px rgba(18,51,43,.18), 0 14px 28px rgba(18,51,43,.10);">
           <div class="no">01</div><h3>초과사례금 확인</h3><p>받은 사실을 알게 된 시점이 기준</p>
         </div>
         <div class="arrow">→</div>
-        <div class="step">
+        <div class="step" style="transform:perspective(900px) rotateY(8deg) rotateX(4deg) translateZ(30px); box-shadow:0 34px 76px rgba(18,51,43,.18), 0 14px 28px rgba(18,51,43,.10);">
           <div class="no">02</div><h3>2일 이내 신고</h3><p>행동강령책임관에게 서면 신고</p>
         </div>
         <div class="arrow">→</div>
-        <div class="step">
+        <div class="step" style="transform:perspective(900px) rotateY(-8deg) rotateX(4deg) translateZ(30px); box-shadow:0 34px 76px rgba(18,51,43,.18), 0 14px 28px rgba(18,51,43,.10);">
           <div class="no">03</div><h3>제공자에게 반환</h3><p>초과금액을 지체 없이 반환</p>
         </div>
         <div class="arrow">→</div>
-        <div class="step">
+        <div class="step" style="transform:perspective(900px) rotateY(-24deg) rotateX(4deg) translateZ(18px); box-shadow:0 34px 76px rgba(18,51,43,.18), 0 14px 28px rgba(18,51,43,.10);">
           <div class="no">04</div><h3>반환 사실 알림</h3><p>반환 증명자료를 남기고 관련 절차 마무리</p>
         </div>
       </div>
 
-      <div class="glass" style="margin-top:18px">
+      <div class="glass" style="margin-top:18px; transform:perspective(900px) rotateX(10deg) translateZ(28px); box-shadow:0 42px 110px rgba(18,51,43,.22), 0 18px 36px rgba(18,51,43,.10);">
         <div class="card-title">실무 기억법</div>
         <div class="quote">“<mark>2일 신고 → 바로 반환 → 증빙 보관</mark>”</div>
         <p class="muted" style="line-height:1.7">기관 내부 절차에 따라 지정 서식을 사용하고, 반환 비용 청구가 가능한 경우에는 증명자료를 첨부합니다.</p>
@@ -552,7 +553,7 @@
     </section>
 
     <!-- 7 -->
-    <section class="slide" data-title="근거법령">
+    <section class="slide" data-title="근거법령" style="perspective:3200px; transform-style:preserve-3d;">
       <div class="split-title">
         <div>
           <div class="eyebrow">06 / LEGAL BASIS</div>
@@ -562,7 +563,7 @@
       </div>
 
       <div class="grid cols2">
-        <div class="glass">
+        <div class="glass" style="transform:perspective(900px) rotateY(16deg) rotateX(4deg) translateZ(24px); box-shadow:0 42px 110px rgba(18,51,43,.22), 0 18px 36px rgba(18,51,43,.10);">
           <div class="card-title">공무원 행동강령 제15조</div>
           <div class="law-list">
             <div class="law"><strong>① 사례금 수수 제한</strong><span>정해진 금액을 초과하는 사례금 수수 금지</span></div>
@@ -573,7 +574,7 @@
           </div>
         </div>
 
-        <div class="glass">
+        <div class="glass" style="transform:perspective(900px) rotateY(-16deg) rotateX(4deg) translateZ(24px); box-shadow:0 42px 110px rgba(18,51,43,.22), 0 18px 36px rgba(18,51,43,.10);">
           <div class="card-title">양산시 공무원 행동강령 제16조·제17조</div>
           <div class="law-list">
             <div class="law"><strong>제16조</strong><span>외부강의등 사례금, 신고, 보완, 제한, 초과사례금 반환, 월 3회 또는 월 6시간 초과 시 승인</span></div>
@@ -587,7 +588,7 @@
     </section>
 
     <!-- 8 -->
-    <section class="slide" data-title="서식">
+    <section class="slide" data-title="서식" style="perspective:3200px; transform-style:preserve-3d;">
       <div class="split-title">
         <div>
           <div class="eyebrow">07 / FORMS</div>
@@ -597,7 +598,7 @@
       </div>
 
       <div class="grid cols2">
-        <div class="glass">
+        <div class="glass" style="transform:perspective(900px) rotateY(16deg) rotateX(4deg) translateZ(24px); box-shadow:0 42px 110px rgba(18,51,43,.22), 0 18px 36px rgba(18,51,43,.10);">
           <div class="card-title"><span class="tag">별지 제5호</span>외부강의등 신고서</div>
           <div class="checklist">
             <div class="check"><div class="dot"></div><div><b>신고자</b><span>성명 · 소속 · 직위(직급) · 연락처</span></div></div>
@@ -607,7 +608,7 @@
           </div>
         </div>
 
-        <div class="glass danger">
+        <div class="glass danger" style="transform:perspective(900px) rotateY(-16deg) rotateX(4deg) translateZ(24px); box-shadow:0 42px 110px rgba(18,51,43,.22), 0 18px 36px rgba(18,51,43,.10);">
           <div class="card-title"><span class="tag">별지 제6호</span>초과사례금 신고서</div>
           <div class="checklist">
             <div class="check"><div class="dot"></div><div><b>기본 정보</b><span>신고자 · 요청인 · 강의 주제 · 장소 · 일시</span></div></div>
@@ -622,7 +623,7 @@
     </section>
 
     <!-- 9 -->
-    <section class="slide" data-title="FAQ">
+    <section class="slide" data-title="FAQ" style="perspective:3200px; transform-style:preserve-3d;">
       <div class="split-title">
         <div>
           <div class="eyebrow">08 / FAQ</div>
@@ -680,7 +681,7 @@
     </section>
 
     <!-- 10 -->
-    <section class="slide" data-title="Final Check">
+    <section class="slide" data-title="Final Check" style="perspective:3200px; transform-style:preserve-3d;">
       <div class="hero">
         <div>
           <div class="eyebrow">FINAL CHECK</div>
@@ -693,7 +694,7 @@
             <div class="check"><div class="dot"></div><div><b>⑤ 사례금이 상한을 넘지 않는가?</b><span>초과했다면 2일 이내 신고·반환 절차로 전환</span></div></div>
           </div>
         </div>
-        <div class="hero-card">
+        <div class="hero-card" style="transform:perspective(900px) rotateY(-26deg) rotateX(16deg) translateZ(54px); box-shadow:0 42px 110px rgba(18,51,43,.24), 0 18px 36px rgba(18,51,43,.12);">
           <div class="kicker">QUICK MEMORY</div>
           <div class="big-number">10<span style="font-size:.26em;color:var(--accent2)">일</span></div>
           <p style="color:#c4cee0;line-height:1.6">기본 신고 시한</p>
