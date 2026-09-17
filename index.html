@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="theme-color" content="#0b1020" />
+<meta name="theme-color" content="#050711" />
 <title>외부강의등 신고안내 | 공직자 실무 가이드</title>
 <style>
   :root{
-    --bg:#070b16;
+    --bg:#050711;
     --panel:#10182b;
     --panel2:#151f36;
     --text:#f6f8ff;
@@ -45,7 +45,11 @@
   .stage{position:relative;flex:1;min-height:0}
   .slide{
     position:absolute;inset:0;overflow:auto;padding:54px clamp(20px,5vw,80px) 90px;
-    display:none;scroll-behavior:smooth
+    display:none;scroll-behavior:smooth;
+    background:
+      radial-gradient(circle at 85% 10%, rgba(110,168,255,.12), transparent 26%),
+      radial-gradient(circle at 10% 90%, rgba(108,240,210,.08), transparent 24%),
+      linear-gradient(180deg, rgba(16,24,43,.94), rgba(5,7,17,.98));
   }
   .slide.active{display:block;animation:enter .55s cubic-bezier(.2,.8,.2,1)}
   @keyframes enter{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
@@ -73,13 +77,13 @@
   .mini span{color:var(--muted);font-size:12px;line-height:1.5}
   .big-number{font-size:clamp(68px,10vw,130px);font-weight:950;line-height:.9;letter-spacing:-.08em}
   .number-row{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end}
-  .number-box{flex:1;min-width:150px;padding:24px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025))}
+  .number-box{flex:1;min-width:150px;padding:24px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025));backdrop-filter:blur(8px)}
   .number-box .value{font-size:clamp(48px,6vw,80px);font-weight:950;letter-spacing:-.06em;line-height:1}
   .number-box .unit{font-size:18px;color:var(--accent2);margin-left:5px;font-weight:800}
   .number-box p{margin:10px 0 0;color:var(--muted);font-size:13px}
   .glass{
     background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.025));
-    border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:var(--shadow)
+    border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:var(--shadow);backdrop-filter:blur(10px)
   }
   .grid{display:grid;gap:18px}
   .grid.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -87,7 +91,7 @@
   .card-title{font-size:18px;font-weight:900;margin-bottom:12px}
   .card-title .tag{display:inline-block;padding:5px 9px;border-radius:99px;font-size:11px;background:rgba(110,168,255,.14);color:var(--accent);margin-right:8px}
   .checklist{display:grid;gap:10px}
-  .check{display:flex;gap:11px;align-items:flex-start;padding:14px 16px;border-radius:15px;background:rgba(0,0,0,.16);border:1px solid rgba(255,255,255,.06)}
+  .check{display:flex;gap:11px;align-items:flex-start;padding:14px 16px;border-radius:15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)}
   .check .dot{width:10px;height:10px;border-radius:50%;background:var(--ok);margin-top:6px;flex:0 0 10px;box-shadow:0 0 10px rgba(125,227,161,.35)}
   .check b{display:block;margin-bottom:3px}
   .check span{font-size:13px;color:#c0cadc;line-height:1.55}
@@ -100,9 +104,9 @@
   .step .no{font-size:11px;color:var(--accent2);font-weight:900;letter-spacing:.12em}
   .step h3{margin:7px 0 7px;font-size:18px}
   .step p{color:#bdc8db;font-size:13px;line-height:1.6;margin:0}
-  .flow .arrow{align-self:center;font-size:26px;color:#66748f}
+  .flow .arrow{align-self:center;font-size:26px;color:#8fa0be}
   .faq-search{display:flex;gap:10px;margin:18px 0}
-  .faq-search input{flex:1;border:1px solid var(--line);background:rgba(0,0,0,.22);color:var(--text);border-radius:14px;padding:14px 16px;outline:none}
+  .faq-search input{flex:1;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);border-radius:14px;padding:14px 16px;outline:none}
   .faq-search input:focus{border-color:rgba(110,168,255,.45);box-shadow:0 0 0 4px rgba(110,168,255,.09)}
   .faq-list{display:grid;gap:10px}
   .faq{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:rgba(255,255,255,.035)}
@@ -146,7 +150,7 @@
   .institution-stats .number-box .value{font-size:clamp(52px,6vw,82px)}
   .institution-stats .number-box{padding:24px 26px}
   .institution-stats .number-box p{font-size:14px}
-  .tip{padding:18px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.04)}
+  .tip{padding:18px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.04);backdrop-filter:blur(8px)}
   .tip b{font-size:13px;color:var(--accent2)}
   .tip strong{display:block;font-size:24px;margin:8px 0 4px}
   .tip span{font-size:12px;color:var(--muted)}
@@ -195,7 +199,7 @@
   .backtotop.show{display:block}
   /* 모바일 전용 프레젠테이션 레이아웃 */
   @media (max-width:900px){
-    body{overflow:auto;background:#070b16}
+    body{overflow:auto;background:radial-gradient(circle at 20% 0%,#162449 0,#090d19 38%,#050711 100%)}
     .app{height:auto;min-height:100vh}
     .topbar{position:sticky;top:0;height:60px;padding:0 14px;background:rgba(7,11,22,.94);z-index:30}
     .brand strong{font-size:14px}
