@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0b1020" />
+<title>외부강의등 신고안내 | 공직자 실무 가이드</title>
+<style>
+  :root{
+    --bg:#070b16;
+    --panel:#10182b;
+    --panel2:#151f36;
+    --text:#f6f8ff;
+    --muted:#a9b5cb;
+    --line:rgba(255,255,255,.10);
+    --accent:#6ea8ff;
+    --accent2:#6cf0d2;
+    --warning:#ffd66e;
+    --danger:#ff7777;
+    --ok:#7de3a1;
+    --shadow:0 25px 70px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:radial-gradient(circle at 20% 0%,#162449 0,#090d19 38%,#050711 100%);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Malgun Gothic",sans-serif}
+  body{overflow:hidden}
+  button,input{font:inherit}
+  .app{height:100vh;display:flex;flex-direction:column}
+  .topbar{
+    height:68px;display:flex;align-items:center;justify-content:space-between;
+    padding:0 22px;border-bottom:1px solid var(--line);
+    background:rgba(7,11,22,.72);backdrop-filter:blur(14px);z-index:10
+  }
+  .brand{display:flex;gap:12px;align-items:center}
+  .logo{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--accent),#8d7dff);font-weight:900;box-shadow:0 10px 25px rgba(110,168,255,.25)}
+  .brand strong{font-size:15px;letter-spacing:-.02em}
+  @media (max-width:900px){ .brand strong::after{content:" · 모바일 가이드";color:var(--accent2);font-weight:700} }
+  .brand span{color:var(--muted);font-size:12px;margin-left:4px}
+  .top-actions{display:flex;gap:8px}
+  .icon-btn{
+    border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);
+    width:40px;height:40px;border-radius:12px;cursor:pointer
+  }
+  .icon-btn:hover{background:rgba(255,255,255,.09)}
+  .stage{position:relative;flex:1;min-height:0}
+  .slide{
+    position:absolute;inset:0;overflow:auto;padding:54px clamp(20px,5vw,80px) 90px;
+    display:none;scroll-behavior:smooth
+  }
+  .slide.active{display:block;animation:enter .55s cubic-bezier(.2,.8,.2,1)}
+  @keyframes enter{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
+  .hero{
+    min-height:100%;display:grid;grid-template-columns:1.12fr .88fr;gap:34px;align-items:center
+  }
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--accent2);font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+  .eyebrow:before{content:"";width:7px;height:7px;border-radius:99px;background:var(--accent2);box-shadow:0 0 18px var(--accent2)}
+  h1{font-size:clamp(40px,6vw,78px);line-height:1.02;letter-spacing:-.055em;margin:18px 0}
+  h2{font-size:clamp(30px,4vw,54px);line-height:1.08;letter-spacing:-.04em;margin:10px 0 18px}
+  .lead{font-size:clamp(16px,1.6vw,21px);color:#d4ddf0;line-height:1.7;max-width:780px}
+  .accent{color:var(--accent);text-shadow:0 0 24px rgba(110,168,255,.25)}
+  .muted{color:var(--muted)}
+  .hero-card{
+    background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.03));
+    border:1px solid var(--line);border-radius:28px;padding:26px;box-shadow:var(--shadow);
+    transform:perspective(900px) rotateY(-5deg);transition:.4s ease
+  }
+  .hero-card:hover{transform:perspective(900px) rotateY(0deg) translateY(-4px)}
+  .pulse{animation:pulse 3.8s infinite ease-in-out}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(110,168,255,.18)}50%{box-shadow:0 0 0 13px rgba(110,168,255,0)}}
+  .mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .mini{padding:18px;border-radius:18px;background:rgba(5,9,18,.48);border:1px solid var(--line)}
+  .mini b{display:block;font-size:28px;margin-bottom:4px}
+  .mini span{color:var(--muted);font-size:12px;line-height:1.5}
+  .big-number{font-size:clamp(68px,10vw,130px);font-weight:950;line-height:.9;letter-spacing:-.08em}
+  .number-row{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end}
+  .number-box{flex:1;min-width:150px;padding:24px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025))}
+  .number-box .value{font-size:clamp(48px,6vw,80px);font-weight:950;letter-spacing:-.06em;line-height:1}
+  .number-box .unit{font-size:18px;color:var(--accent2);margin-left:5px;font-weight:800}
+  .number-box p{margin:10px 0 0;color:var(--muted);font-size:13px}
+  .glass{
+    background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.025));
+    border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:var(--shadow)
+  }
+  .grid{display:grid;gap:18px}
+  .grid.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid.cols3{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .card-title{font-size:18px;font-weight:900;margin-bottom:12px}
+  .card-title .tag{display:inline-block;padding:5px 9px;border-radius:99px;font-size:11px;background:rgba(110,168,255,.14);color:var(--accent);margin-right:8px}
+  .checklist{display:grid;gap:10px}
+  .check{display:flex;gap:11px;align-items:flex-start;padding:14px 16px;border-radius:15px;background:rgba(0,0,0,.16);border:1px solid rgba(255,255,255,.06)}
+  .check .dot{width:10px;height:10px;border-radius:50%;background:var(--ok);margin-top:6px;flex:0 0 10px;box-shadow:0 0 10px rgba(125,227,161,.35)}
+  .check b{display:block;margin-bottom:3px}
+  .check span{font-size:13px;color:#c0cadc;line-height:1.55}
+  .warn{border-color:rgba(255,214,110,.24);background:rgba(255,214,110,.055)}
+  .warn .dot{background:var(--warning)}
+  .danger{border-color:rgba(255,119,119,.24);background:rgba(255,119,119,.055)}
+  .danger .dot{background:var(--danger)}
+  .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:12px;margin-top:20px}
+  .step{flex:1;min-width:180px;padding:20px;border-radius:20px;background:rgba(255,255,255,.045);border:1px solid var(--line);position:relative}
+  .step .no{font-size:11px;color:var(--accent2);font-weight:900;letter-spacing:.12em}
+  .step h3{margin:7px 0 7px;font-size:18px}
+  .step p{color:#bdc8db;font-size:13px;line-height:1.6;margin:0}
+  .flow .arrow{align-self:center;font-size:26px;color:#66748f}
+  .faq-search{display:flex;gap:10px;margin:18px 0}
+  .faq-search input{flex:1;border:1px solid var(--line);background:rgba(0,0,0,.22);color:var(--text);border-radius:14px;padding:14px 16px;outline:none}
+  .faq-search input:focus{border-color:rgba(110,168,255,.45);box-shadow:0 0 0 4px rgba(110,168,255,.09)}
+  .faq-list{display:grid;gap:10px}
+  .faq{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:rgba(255,255,255,.035)}
+  .faq button{width:100%;border:0;background:none;color:var(--text);padding:17px 18px;text-align:left;display:flex;gap:12px;justify-content:space-between;align-items:center;cursor:pointer;font-weight:800}
+  .faq .answer{display:none;padding:0 18px 18px;color:#bec9dc;line-height:1.7;font-size:14px}
+  .faq.open .answer{display:block}
+  .faq .chev{transition:.25s}
+  .faq.open .chev{transform:rotate(180deg)}
+  .law-list{display:grid;gap:12px}
+  .law{padding:18px 20px;border-radius:18px;background:rgba(255,255,255,.035);border:1px solid var(--line)}
+  .law strong{display:block;margin-bottom:5px}
+  .law span{display:block;color:var(--muted);font-size:13px;line-height:1.6}
+  .two-col{display:grid;grid-template-columns:1.02fr .98fr;gap:18px}
+  .notice{
+    margin-top:18px;padding:16px 18px;border-radius:16px;border:1px solid rgba(108,240,210,.2);
+    background:linear-gradient(90deg,rgba(108,240,210,.08),rgba(110,168,255,.05));color:#dcecff;font-size:13px;line-height:1.7
+  }
+  .slide-footer{display:flex;justify-content:space-between;gap:12px;margin-top:28px;color:#8190a9;font-size:12px}
+  .bottom{
+    height:74px;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:0 20px;
+    border-top:1px solid var(--line);background:rgba(7,11,22,.82);backdrop-filter:blur(14px);z-index:10
+  }
+  .controls{display:flex;gap:8px}
+  .ctrl{
+    border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--text);padding:11px 15px;border-radius:13px;cursor:pointer
+  }
+  .ctrl.primary{background:linear-gradient(135deg,#557eff,#8c79ff);border:0}
+  .dots{display:flex;gap:6px;align-items:center;overflow:auto;max-width:45vw}
+  .dot-nav{width:24px;height:4px;border-radius:10px;border:0;background:#39445a;cursor:pointer;flex:0 0 auto}
+  .dot-nav.active{background:var(--accent);width:40px;box-shadow:0 0 14px rgba(110,168,255,.35)}
+  .progress{position:absolute;left:0;bottom:74px;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%;transition:width .45s ease;z-index:11}
+  .kicker{font-size:13px;color:var(--muted);margin-bottom:8px}
+  .split-title{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:18px}
+  .split-title small{color:#7f8ba0;white-space:nowrap}
+  .quote{
+    font-size:clamp(22px,3vw,38px);font-weight:900;line-height:1.28;letter-spacing:-.03em
+  }
+  .quote mark{background:none;color:var(--accent2)}
+  .tip-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+  .institution-stats{margin:0 0 18px}
+  .institution-stats .number-box .value{font-size:clamp(52px,6vw,82px)}
+  .institution-stats .number-box{padding:24px 26px}
+  .institution-stats .number-box p{font-size:14px}
+  .tip{padding:18px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.04)}
+  .tip b{font-size:13px;color:var(--accent2)}
+  .tip strong{display:block;font-size:24px;margin:8px 0 4px}
+  .tip span{font-size:12px;color:var(--muted)}
+
+  /* 5페이지 외부강의 제한·사례금 숫자 강조 */
+  .tip-grid .tip strong{
+    font-size:clamp(34px,4.2vw,58px);
+    line-height:1.02;
+    letter-spacing:-.055em;
+    font-weight:950;
+    white-space:nowrap;
+  }
+  .tip-grid .tip strong .counter{
+    font-size:1em;
+    font-weight:inherit;
+  }
+  .tip-grid .tip span{
+    font-size:14px;
+    line-height:1.45;
+  }
+  .tip-grid .tip b{
+    font-size:14px;
+    letter-spacing:-.02em;
+  }
+  @media (max-width:900px){
+    .tip-grid .tip strong{
+      font-size:clamp(42px,12vw,64px);
+    }
+    .tip-grid .tip span{
+      font-size:13px;
+    }
+  }
+  @media (max-width:560px){
+    .tip-grid{
+      grid-template-columns:1fr;
+    }
+    .tip-grid .tip{
+      padding:22px 20px;
+    }
+    .tip-grid .tip strong{
+      font-size:clamp(48px,16vw,72px);
+    }
+  }
+
+  .backtotop{position:fixed;right:18px;bottom:88px;display:none}
+  .backtotop.show{display:block}
+  /* 모바일 전용 프레젠테이션 레이아웃 */
+  @media (max-width:900px){
+    body{overflow:auto;background:#070b16}
+    .app{height:auto;min-height:100vh}
+    .topbar{position:sticky;top:0;height:60px;padding:0 14px;background:rgba(7,11,22,.94);z-index:30}
+    .brand strong{font-size:14px}
+    .brand span{display:inline;font-size:10px}
+    .logo{width:31px;height:31px;border-radius:9px}
+    .stage{min-height:calc(100vh - 134px);padding:0}
+    .slide{position:relative;inset:auto;min-height:calc(100vh - 134px);padding:28px 14px 92px;overflow:auto;background:linear-gradient(180deg,#080d1a 0%,#0b1222 100%)}
+    .slide.active{display:block}
+    .hero,.two-col{grid-template-columns:1fr;gap:16px}
+    .hero{min-height:auto;align-content:center}
+    .hero-card{transform:none;padding:20px;border-radius:22px}
+    .glass{padding:18px;border-radius:20px}
+    .grid.cols2,.grid.cols3{grid-template-columns:1fr}
+    .tip-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+    .tip{padding:15px;border-radius:16px}
+    .tip strong{font-size:22px}
+    .number-row{gap:10px}
+    .number-box{min-width:0;padding:18px 16px;border-radius:19px}
+    .number-box .value{font-size:50px}
+    .number-box p{font-size:12px}
+    .institution-stats .number-box .value{font-size:58px}
+    .flow{display:grid;grid-template-columns:1fr;gap:9px}
+    .flow .arrow{display:none}
+    .step{min-width:0;padding:17px;border-radius:17px}
+    .step h3{font-size:16px}
+    .check{padding:13px 14px;border-radius:14px}
+    .check span{font-size:12px}
+    .faq-search{position:sticky;top:0;z-index:5;padding:8px 0;background:linear-gradient(#080d1a 70%,transparent);margin-top:4px}
+    .faq-search input{padding:13px 14px}
+    .faq button{padding:15px 14px;font-size:13px}
+    .faq .answer{padding:0 14px 15px;font-size:13px}
+    .bottom{position:fixed;left:0;right:0;bottom:0;height:68px;padding:0 10px;background:rgba(7,11,22,.96);z-index:30}
+    .progress{position:fixed;bottom:68px;z-index:31}
+    .dots{display:none}
+    .page-footer{display:none}
+  }
+  @media (max-width:560px){
+    .topbar{height:56px}
+    .brand span{display:none}
+    h1{font-size:43px}
+    h2{font-size:32px}
+    .lead{font-size:15px;line-height:1.65}
+    .eyebrow{font-size:10px}
+    .split-title{align-items:flex-start;margin-bottom:14px}
+    .split-title small{font-size:10px}
+    .tip-grid{grid-template-columns:1fr 1fr}
+    .number-row{display:grid;grid-template-columns:1fr 1fr}
+    .number-box .value{font-size:44px}
+    .institution-stats .number-box .value{font-size:51px}
+    .number-box .unit{font-size:15px}
+    .mini-grid{gap:8px}
+    .mini{padding:14px}
+    .mini b{font-size:24px}
+    .bottom{padding:0 8px}
+    .ctrl{padding:9px 11px;font-size:13px}
+    .pageNo{font-size:11px}
+  }
+  @media print{
+    body{overflow:visible;background:white;color:#111}
+    .topbar,.bottom,.progress,.backtotop{display:none!important}
+    .stage{display:block}
+    .slide,.slide.active{display:block!important;position:relative;min-height:auto;page-break-after:always;color:#111;background:white}
+    .glass,.hero-card,.number-box,.step,.tip,.faq,.law{color:#111;background:#fff;border:1px solid #ccc;box-shadow:none}
+    .muted,.faq .answer,.lead,.check span,.law span,.tip span{color:#444}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">AI</div>
+      <div>
+        <strong>외부강의등 신고안내</strong>
+        <span>공직자 실무용 Presentation Guide</span>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button class="icon-btn" id="printBtn" title="인쇄">🖨</button>
+      <button class="icon-btn" id="fsBtn" title="전체화면">⛶</button>
+    </div>
+  </header>
+
+  <main class="stage" id="stage">
+
+    <!-- 1 -->
+    <section class="slide active" data-title="Intro">
+      <div class="hero">
+        <div>
+          <div class="eyebrow">PUBLIC OFFICIAL / QUICK GUIDE</div>
+          <h1>외부강의,<br><span class="accent">가기 전에</span> 확인하세요.</h1>
+          <p class="lead">외부강의등의 해당 여부부터 신고, 횟수·시간, 사례금, 초과사례금 처리까지 <b>출강 전 꼭 확인할 핵심 포인트</b>를 한 화면씩 빠르게 확인할 수 있도록 구성했습니다.</p>
+          <div class="notice">※ 이 자료는 제공하신 안내문을 기준으로 정리한 실무용 화면입니다. 실제 신고 전에는 <b>현행 법령·양산시 행동강령·기관 내부지침</b>을 최종 확인하세요.</div>
+        </div>
+        <div class="hero-card pulse">
+          <div class="kicker">오늘 기억할 숫자</div>
+          <div class="mini-grid">
+            <div class="mini"><b class="counter" data-target="10">0</b><span>신고 기한(일)</span></div>
+            <div class="mini"><b class="counter" data-target="40">0만원</b><span>1시간 상한액(제공자료 기준)</span></div>
+            <div class="mini"><b class="counter" data-target="3">0회</b><span>월 횟수 기준</span></div>
+            <div class="mini"><b class="counter" data-target="6">0시간</b><span>월 시간 기준</span></div>
+          </div>
+          <div style="margin-top:18px;color:#9cadc8;font-size:12px;line-height:1.6">
+            핵심은 단순합니다.<br>
+            <b style="color:#fff">“무엇이 외부강의인가 → 신고 대상인가 → 금액과 횟수 기준은 무엇인가”</b>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="slide" data-title="정의">
+      <div class="split-title">
+        <div>
+          <div class="eyebrow">01 / DEFINITION</div>
+          <h2>먼저, <span class="accent">외부강의등</span>인가?</h2>
+        </div>
+        <small>판단의 출발점</small>
+      </div>
+
+      <div class="grid cols2">
+        <div class="glass">
+          <div class="card-title"><span class="tag">핵심</span>외부강의등의 의미</div>
+          <p class="quote">직무 관련성 또는 지위·직책에서 유래되는 영향력을 통해 요청받은 <mark>강의·강연·기고 등</mark></p>
+          <div class="checklist" style="margin-top:18px">
+            <div class="check"><div class="dot"></div><div><b>교육·홍보·토론회·세미나·공청회</b><span>다수인을 대상으로 의견·지식을 전달하는 형태</span></div></div>
+            <div class="check"><div class="dot"></div><div><b>그 밖의 회의</b><span>회의 형태도 외부강의등의 범위에 포함</span></div></div>
+            <div class="check"><div class="dot"></div><div><b>기고</b><span>신문·잡지 등에 싣기 위해 원고를 써서 보내는 행위</span></div></div>
+          </div>
+        </div>
+
+        <div class="glass">
+          <div class="card-title"><span class="tag">CHECK</span>이런 경우는 외부강의등이 아님</div>
+          <div class="checklist">
+            <div class="check"><div class="dot"></div><div><b>겸직허가를 받은 학교 출강</b><span>허가받은 범위 내에서 겸직 직무 수행</span></div></div>
+            <div class="check"><div class="dot"></div><div><b>개별 방송 인터뷰</b><span>사회자와의 개별 인터뷰</span></div></div>
+            <div class="check"><div class="dot"></div><div><b>서면심사·서면자문</b><span>다수인 대상도 아니고 회의 형태도 아닌 경우</span></div></div>
+            <div class="check"><div class="dot"></div><div><b>법령상 위원회 참석</b><span>위원으로서의 법정 업무 수행</span></div></div>
+            <div class="check"><div class="dot"></div><div><b>연주·공연·전시</b><span>문화예술행위로 의견·지식 전달 또는 회의 형태가 아님</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="notice warn"><b>판단 포인트:</b> 단순히 “강의인가?”가 아니라 <b>① 누가 요청했는지 ② 직무·지위와 관련되는지 ③ 다수 대상 전달 또는 회의 형태인지</b>를 함께 봅니다.</div>
+    </section>
+
+    <!-- 3 -->
+    <section class="slide" data-title="신고">
+      <div class="split-title">
+        <div>
+          <div class="eyebrow">02 / REPORT</div>
+          <h2><span class="accent">신고대상</span>은 누구?</h2>
+        </div>
+        <small>사례금 + 요청기관</small>
+      </div>
+
+      <div class="number-row">
+        <div class="number-box">
+          <div class="value"><span class="counter" data-target="10">0</span><span class="unit">일</span></div>
+          <p>외부강의등을 마친 날부터 신고 가능 기간</p>
+        </div>
+        <div class="number-box">
+          <div class="value"><span class="counter" data-target="0">0</span><span class="unit">원</span></div>
+          <p>사례금을 받지 않는 외부강의등 → 신고 의무 없음</p>
+        </div>
+        <div class="number-box">
+          <div class="value"><span class="counter" data-target="0">0</span><span class="unit">건</span></div>
+          <p>국가·지방자치단체 요청 → 신고대상에서 제외</p>
+        </div>
+      </div>
+
+      <div class="flow">
+        <div class="step">
+          <div class="no">STEP 01</div><h3>사례금이 있는가?</h3>
+          <p>없음 → 행동강령상 신고의무 없음.<br>있음 → 다음 단계로.</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="step">
+          <div class="no">STEP 02</div><h3>요청자가 국가·지자체인가?</h3>
+          <p>맞음 → 신고대상 제외.<br>아니오 → 신고 필요.</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="step">
+          <div class="no">STEP 03</div><h3>신고 시점 확인</h3>
+          <p>기본적으로 마친 날부터 10일 이내.<br>사전에 구체적 내용을 아는 경우 사전신고 가능.</p>
+        </div>
+      </div>
+
+      <div class="grid cols2" style="margin-top:18px">
+        <div class="glass">
+          <div class="card-title">새올 신고 흐름</div>
+          <p style="color:#c4cde0;line-height:1.8;margin:0">
+            <b>새올 → 감사 → 외부강의등 → 외부강의등신고목록 → 추가</b><br>
+            요청기관 공문 + 외부강의 신고서 첨부하여 감사담당관실에 공문 신고
+          </p>
+        </div>
+        <div class="glass warn">
+          <div class="card-title">미리 모르는 정보가 있다면?</div>
+          <p style="color:#d9d4bc;line-height:1.8;margin:0">
+            사례금 총액·상세 명세 등을 알 수 없다면 우선 아는 사항을 신고하고,
+            <b>해당 내용을 안 날부터 5일 이내</b> 보완합니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="slide" data-title="기관범위">
+      <div class="split-title">
+        <div>
+          <div class="eyebrow">03 / REQUESTER</div>
+          <h2>“국가·지자체”의 <span class="accent">범위</span>를 확인</h2>
+        </div>
+        <small>신고 제외 여부 판단</small>
+      </div>
+
+      <div class="number-row institution-stats">
+        <div class="number-box">
+          <div class="value"><span class="counter" data-target="17">0</span><span class="unit">개</span></div>
+          <p>시·도교육청</p>
+        </div>
+        <div class="number-box">
+          <div class="value"><span class="counter" data-target="2">0</span><span class="unit">범주</span></div>
+          <p>국가기관 / 지방자치단체·교육청</p>
+        </div>
+      </div>
+
+      <div class="grid cols2">
+        <div class="glass">
+          <div class="card-title"><span class="tag">국가기관</span>대표 범위</div>
+          <div class="law-list">
+            <div class="law"><strong>헌법기관</strong><span>국회 · 법원 · 헌법재판소 · 선거관리위원회 · 감사원</span></div>
+            <div class="law"><strong>중앙행정기관</strong><span>정부조직법상 중앙행정기관 및 소속기관</span></div>
+            <div class="law"><strong>개별법상 행정기관</strong><span>국가인권위원회 · 고위공직자범죄수사처 등</span></div>
+            <div class="law"><strong>국립 교육기관</strong><span>국립 유치원·초중고·대학교는 교육부 소속으로 해당</span></div>
+          </div>
+        </div>
+
+        <div class="glass">
+          <div class="card-title"><span class="tag">지방</span>지방자치단체·교육청</div>
+          <div class="law-list">
+            <div class="law"><strong>지방자치단체</strong><span>광역자치단체 · 기초자치단체 · 지방의회 및 해당 행정기구</span></div>
+            <div class="law"><strong>교육청</strong><span>17개 시·도교육청</span></div>
+            <div class="law"><strong>공립 교육기관</strong><span>공립 유치원·초중고·대학교는 교육청 또는 지자체 소속</span></div>
+            <div class="law"><strong>산학협력단 주의</strong><span>국·공립대학의 소속기구인 경우 신고의무가 없지만, 별도 공직유관단체 지정 여부 등은 확인</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass danger" style="margin-top:18px">
+        <div class="card-title">⚠ 주의: 공공기관·공직유관단체</div>
+        <p style="color:#f0c9c9;line-height:1.7;margin:0">
+          요청기관이 「공직자윤리법」상 공직유관단체 또는 「공공기관의 운영에 관한 법률」상 공공기관이라면
+          <b>국가기관 또는 지방자치단체로 보지 않으므로 신고의무 준수가 필요</b>합니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="slide" data-title="제한">
+      <div class="split-title">
+        <div>
+          <div class="eyebrow">04 / LIMITS</div>
+          <h2>외부강의 <span class="accent">제한·사례금</span></h2>
+        </div>
+        <small>가장 많이 실수하는 부분</small>
+      </div>
+
+      <div class="tip-grid">
+        <div class="tip"><b>월 횟수</b><strong><span class="counter" data-target="3">0</span>회</strong><span>대가를 받는 외부강의등</span></div>
+        <div class="tip"><b>월 시간</b><strong><span class="counter" data-target="6">0</span>시간</strong><span>양산시 자료 기준</span></div>
+        <div class="tip"><b>1시간 상한</b><strong><span class="counter" data-target="40">0</span>만원</strong><span>제공자료 기준</span></div>
+        <div class="tip"><b>총액 상한</b><strong><span class="counter" data-target="60">0</span>만원</strong><span>1시간 초과 강의 등</span></div>
+      </div>
+
+      <div class="grid cols2" style="margin-top:18px">
+        <div class="glass">
+          <div class="card-title"><span class="tag">횟수·시간</span>초과하려면?</div>
+          <div class="checklist">
+            <div class="check"><div class="dot"></div><div><b>월 3회 또는 월 6시간 초과</b><span>대가를 받고 수행하려면 사전에 행동강령책임관의 승인을 받는 기준으로 안내</span></div></div>
+            <div class="check"><div class="dot"></div><div><b>제외되는 경우</b><span>국가·지방자치단체 요청 또는 사전 겸직허가를 받은 외부강의등은 횟수에 포함하지 않음</span></div></div>
+            <div class="check"><div class="dot"></div><div><b>공정한 직무수행</b><span>기관의 장은 공정한 직무수행을 저해할 우려가 있으면 외부강의등을 제한할 수 있음</span></div></div>
+          </div>
+        </div>
+
+        <div class="glass">
+          <div class="card-title"><span class="tag">사례금</span>여기까지가 상한</div>
+          <div class="checklist">
+            <div class="check"><div class="dot"></div><div><b>1시간 기준 40만원</b><span>강의 등의 1시간 상한액으로 안내된 금액</span></div></div>
+            <div class="check"><div class="dot"></div><div><b>1시간 초과 → 총 60만원</b><span>시간이 길어져도 총액은 1시간 상한액의 150%를 초과할 수 없음</span></div></div>
+            <div class="check"><div class="dot"></div><div><b>강의료·원고료·출연료 등</b><span>외부강의등과 관련해 제공되는 일체의 사례금 포함</span></div></div>
+            <div class="check"><div class="dot"></div><div><b>교통비·숙박비·식비</b><span>소속기관에서 여비를 지급받지 못한 경우 관련 여비규정 기준의 실비는 사례금과 별도 취급 가능</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="notice warn"><b>핵심:</b> “신고대상이 아니니까 사례금 상한도 없다”가 아닙니다. <b>국가·지자체 요청으로 신고의무가 없어도 사례금 상한 규정은 별도로 적용</b>됩니다.</div>
+    </section>
+
+    <!-- 6 -->
+    <section class="slide" data-title="초과사례금">
+      <div class="split-title">
+        <div>
+          <div class="eyebrow">05 / EXCESS PAYMENT</div>
+          <h2>초과사례금을 받았다면 <span class="accent">즉시 대응</span></h2>
+        </div>
+        <small>2일 → 반환 → 통지</small>
+      </div>
+
+      <div class="number-row">
+        <div class="number-box">
+          <div class="value"><span class="counter" data-target="2">0</span><span class="unit">일</span></div>
+          <p>초과사례금을 받은 사실을 안 날부터 신고</p>
+        </div>
+        <div class="number-box">
+          <div class="value"><span class="counter" data-target="7">0</span><span class="unit">일</span></div>
+          <p>행동강령책임관이 반환액 산정·통지하는 기간</p>
+        </div>
+      </div>
+
+      <div class="flow">
+        <div class="step">
+          <div class="no">01</div><h3>초과사례금 확인</h3><p>받은 사실을 알게 된 시점이 기준</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="step">
+          <div class="no">02</div><h3>2일 이내 신고</h3><p>행동강령책임관에게 서면 신고</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="step">
+          <div class="no">03</div><h3>제공자에게 반환</h3><p>초과금액을 지체 없이 반환</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="step">
+          <div class="no">04</div><h3>반환 사실 알림</h3><p>반환 증명자료를 남기고 관련 절차 마무리</p>
+        </div>
+      </div>
+
+      <div class="glass" style="margin-top:18px">
+        <div class="card-title">실무 기억법</div>
+        <div class="quote">“<mark>2일 신고 → 바로 반환 → 증빙 보관</mark>”</div>
+        <p class="muted" style="line-height:1.7">기관 내부 절차에 따라 지정 서식을 사용하고, 반환 비용 청구가 가능한 경우에는 증명자료를 첨부합니다.</p>
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section class="slide" data-title="근거법령">
+      <div class="split-title">
+        <div>
+          <div class="eyebrow">06 / LEGAL BASIS</div>
+          <h2><span class="accent">근거 법령</span> 한눈에 보기</h2>
+        </div>
+        <small>제공 자료 기준</small>
+      </div>
+
+      <div class="grid cols2">
+        <div class="glass">
+          <div class="card-title">공무원 행동강령 제15조</div>
+          <div class="law-list">
+            <div class="law"><strong>① 사례금 수수 제한</strong><span>정해진 금액을 초과하는 사례금 수수 금지</span></div>
+            <div class="law"><strong>② 신고</strong><span>사례금을 받는 외부강의등은 신고. 국가·지자체 요청은 신고 제외</span></div>
+            <div class="law"><strong>④ 제한</strong><span>공정한 직무수행 저해 시 기관장이 제한 가능</span></div>
+            <div class="law"><strong>⑤~⑥ 초과사례금</strong><span>신고 및 반환, 반환 비용 청구 가능</span></div>
+            <div class="law"><strong>⑦~⑧ 횟수 상한</strong><span>과도한 외부강의 방지를 위해 기관별 상한 설정 및 초과 시 승인</span></div>
+          </div>
+        </div>
+
+        <div class="glass">
+          <div class="card-title">양산시 공무원 행동강령 제16조·제17조</div>
+          <div class="law-list">
+            <div class="law"><strong>제16조</strong><span>외부강의등 사례금, 신고, 보완, 제한, 초과사례금 반환, 월 3회 또는 월 6시간 초과 시 승인</span></div>
+            <div class="law"><strong>제17조</strong><span>초과사례금 신고는 안 날부터 2일 이내, 반환액 산정·통지 등 절차 규정</span></div>
+            <div class="law"><strong>공직자 행동강령 운영지침 제13조</strong><span>사례금 상한, 신고서식, 횟수 상한 등에 관한 세부 운영기준</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="notice">※ 법령 문구는 개정될 수 있으므로, 실제 신고·징계·사례금 판단에는 <b>현행 국가법령정보센터 및 양산시 최신 자치법규</b>를 확인하세요.</div>
+    </section>
+
+    <!-- 8 -->
+    <section class="slide" data-title="서식">
+      <div class="split-title">
+        <div>
+          <div class="eyebrow">07 / FORMS</div>
+          <h2><span class="accent">신고서식</span>에 무엇을 적나?</h2>
+        </div>
+        <small>별지 제5호·제6호</small>
+      </div>
+
+      <div class="grid cols2">
+        <div class="glass">
+          <div class="card-title"><span class="tag">별지 제5호</span>외부강의등 신고서</div>
+          <div class="checklist">
+            <div class="check"><div class="dot"></div><div><b>신고자</b><span>성명 · 소속 · 직위(직급) · 연락처</span></div></div>
+            <div class="check"><div class="dot"></div><div><b>요청인</b><span>기관명 · 대표자 · 담당부서(담당자) · 연락처</span></div></div>
+            <div class="check"><div class="dot"></div><div><b>강의 정보</b><span>주제 · 장소 · 일시 · 일괄신고 여부</span></div></div>
+            <div class="check"><div class="dot"></div><div><b>사례금</b><span>총액 · 1회 평균 대가 · 교통비·숙박비·식비(실비)</span></div></div>
+          </div>
+        </div>
+
+        <div class="glass danger">
+          <div class="card-title"><span class="tag">별지 제6호</span>초과사례금 신고서</div>
+          <div class="checklist">
+            <div class="check"><div class="dot"></div><div><b>기본 정보</b><span>신고자 · 요청인 · 강의 주제 · 장소 · 일시</span></div></div>
+            <div class="check"><div class="dot"></div><div><b>사례금</b><span>총액 · 1회 평균 대가 · 실비</span></div></div>
+            <div class="check"><div class="dot"></div><div><b>초과사례금</b><span>초과액 · 반환여부 · 반환금액 · 반환방법</span></div></div>
+            <div class="check"><div class="dot"></div><div><b>증빙</b><span>반환 관련 증빙자료 첨부</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="notice"><b>실무 팁:</b> 동일 교육과정에 수회 출강하는 경우 <b>일괄신고</b>가 가능하며, 월(연) 평균 횟수와 1회 평균 시간·대가를 기재하는 방식이 안내되어 있습니다.</div>
+    </section>
+
+    <!-- 9 -->
+    <section class="slide" data-title="FAQ">
+      <div class="split-title">
+        <div>
+          <div class="eyebrow">08 / FAQ</div>
+          <h2>자주 묻는 <span class="accent">질문</span></h2>
+        </div>
+        <small id="faqCount">10개 질문</small>
+      </div>
+
+      <div class="faq-search">
+        <input id="faqSearch" type="search" placeholder="예: 대학 출강, 사회자, 근무시간, 사례금, 위원회" />
+      </div>
+
+      <div class="faq-list" id="faqList">
+        <div class="faq">
+          <button>공청회·간담회에서 사회자 역할을 맡아도 외부강의등인가요?<span class="chev">⌄</span></button>
+          <div class="answer">다수인을 대상으로 의견·지식을 전달하거나 회의 형태라면 외부강의등에 해당할 수 있습니다. 반면 단순한 행사 순서 진행만 하는 사회는 의견·지식 전달로 보기 어려울 수 있습니다.</div>
+        </div>
+        <div class="faq">
+          <button>경진대회에 직접 신청해 업무개선 성과를 발표하면 외부강의등인가요?<span class="chev">⌄</span></button>
+          <div class="answer">직접 신청하여 참가하는 경우 외부로부터 요청받은 것으로 보기 어려워 외부강의등에 해당하지 않는다는 안내가 있습니다. 별도의 요청을 받고 발표하는 경우는 달라질 수 있습니다.</div>
+        </div>
+        <div class="faq">
+          <button>법령상 위원회 위원으로 참석해도 외부강의등인가요?<span class="chev">⌄</span></button>
+          <div class="answer">법령에 따라 설치된 위원회의 위원으로서 회의에 참석하는 것은 해당 위원회 위원으로서의 업무 수행이므로 행동강령상 신고의무가 부과되는 외부강의등에 해당하지 않는다는 안내입니다.</div>
+        </div>
+        <div class="faq">
+          <button>온라인으로 동영상 강의를 하면 외부강의등인가요?<span class="chev">⌄</span></button>
+          <div class="answer">전달매체가 온라인일 뿐 다수인에게 의견·지식을 전달하는 형태라면 외부강의등에 해당한다는 안내입니다.</div>
+        </div>
+        <div class="faq">
+          <button>사례금을 받지 않으면 신고하지 않아도 되나요?<span class="chev">⌄</span></button>
+          <div class="answer">제공된 안내문 기준으로, 사례금을 받지 않는 외부강의등은 행동강령상 신고의무가 없습니다.</div>
+        </div>
+        <div class="faq">
+          <button>대학 출강에 겸직허가를 받았으면 신고해야 하나요?<span class="chev">⌄</span></button>
+          <div class="answer">소속 기관장의 사전 겸직허가를 받고 허가된 범위에서 겸직 직무를 수행하는 경우 행동강령상 외부강의에 해당하지 않아 신고의무가 없다는 안내입니다.</div>
+        </div>
+        <div class="faq">
+          <button>근무시간 외에 하는 강의도 신고하나요?<span class="chev">⌄</span></button>
+          <div class="answer">사례금을 받는 외부강의등이라면 근무시간인지 여부와 관계없이 신고 대상이라는 안내입니다.</div>
+        </div>
+        <div class="faq">
+          <button>30분 강의도 사례금을 받을 수 있나요?<span class="chev">⌄</span></button>
+          <div class="answer">제공 자료에서는 1시간 이내 강의에 1시간 상한액이 적용된다고 안내합니다. 다만 기관이 더 강화된 기준을 별도로 둘 수 있으므로 내부규정을 확인해야 합니다.</div>
+        </div>
+        <div class="faq">
+          <button>외국대학·국제기구에서 초청하면 사례금은 어떻게 보나요?<span class="chev">⌄</span></button>
+          <div class="answer">제공 자료에서는 외국대학·국제기구·국제학술단체 등이 요청자인 경우 해당 외국기관의 지급기준에 따라 사례금을 받을 수 있다고 안내합니다.</div>
+        </div>
+        <div class="faq">
+          <button>신고를 안 했다고 나중에 몰랐다고 하면 괜찮나요?<span class="chev">⌄</span></button>
+          <div class="answer">행동강령 위반의 경우 고의·과실과 별개로 징계대상이 될 수 있으며, 구체적인 처분은 관련 규정에 따라 이루어진다는 안내입니다. 애매하면 출강 전 행동강령책임관 또는 감사부서에 확인하는 것이 안전합니다.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section class="slide" data-title="Final Check">
+      <div class="hero">
+        <div>
+          <div class="eyebrow">FINAL CHECK</div>
+          <h2>출강 직전,<br><span class="accent">5가지만</span> 확인하세요.</h2>
+          <div class="checklist" style="margin-top:20px">
+            <div class="check"><div class="dot"></div><div><b>① 외부강의등인가?</b><span>직무·지위 관련 + 요청 + 다수인 전달/회의 형태인지</span></div></div>
+            <div class="check"><div class="dot"></div><div><b>② 사례금이 있는가?</b><span>없으면 행동강령상 신고의무가 없는지 확인</span></div></div>
+            <div class="check"><div class="dot"></div><div><b>③ 요청자가 국가·지자체인가?</b><span>신고 제외 여부를 확인하되 사례금 상한은 별도 확인</span></div></div>
+            <div class="check"><div class="dot"></div><div><b>④ 월 3회·6시간 기준을 넘는가?</b><span>초과 시 사전 승인 필요 여부 확인</span></div></div>
+            <div class="check"><div class="dot"></div><div><b>⑤ 사례금이 상한을 넘지 않는가?</b><span>초과했다면 2일 이내 신고·반환 절차로 전환</span></div></div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="kicker">QUICK MEMORY</div>
+          <div class="big-number">10<span style="font-size:.26em;color:var(--accent2)">일</span></div>
+          <p style="color:#c4cee0;line-height:1.6">기본 신고 시한</p>
+          <div style="height:1px;background:var(--line);margin:20px 0"></div>
+          <div class="number-row" style="gap:10px">
+            <div style="flex:1"><div style="font-size:36px;font-weight:900">40<span style="font-size:14px;color:var(--accent2)">만원</span></div><div class="muted" style="font-size:12px">1시간 상한</div></div>
+            <div style="flex:1"><div style="font-size:36px;font-weight:900">2<span style="font-size:14px;color:var(--accent2)">일</span></div><div class="muted" style="font-size:12px">초과사례금 신고</div></div>
+          </div>
+          <div class="notice" style="margin-top:20px">불확실하면 <b>행동강령책임관·감사부서에 먼저 확인</b>하세요.</div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>외부강의등 신고안내 · 실무 참고용</span>
+        <span>※ 실제 신고는 현행 규정 확인</span>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="progress" id="progress"></div>
+
+  <footer class="bottom">
+    <div class="controls">
+      <button class="ctrl" id="prevBtn">← 이전</button>
+      <button class="ctrl primary" id="nextBtn">다음 →</button>
+    </div>
+    <div class="dots" id="dots"></div>
+    <div class="muted" id="pageNo">1 / 10</div>
+  </footer>
+  <button class="icon-btn backtotop" id="topBtn" title="페이지 위로">↑</button>
+</div>
+
+<script>
+(() => {
+  const slides = [...document.querySelectorAll('.slide')];
+  const dots = document.getElementById('dots');
+  const pageNo = document.getElementById('pageNo');
+  const progress = document.getElementById('progress');
+  const stage = document.getElementById('stage');
+  let index = 0;
+
+  slides.forEach((s,i)=>{
+    const b = document.createElement('button');
+    b.className = 'dot-nav' + (i===0?' active':'');
+    b.title = s.dataset.title || `페이지 ${i+1}`;
+    b.addEventListener('click',()=>go(i));
+    dots.appendChild(b);
+  });
+
+  const navDots = [...dots.children];
+
+  function animateCounters(scope){
+    const els = scope.querySelectorAll('.counter');
+    els.forEach(el=>{
+      const target = Number(el.dataset.target || 0);
+      const suffix = el.textContent.replace(/[0-9,\-]/g,'');
+      if(el.dataset.animated === 'yes') return;
+      el.dataset.animated = 'yes';
+      if(target===0){ el.textContent = '0' + suffix; return; }
+      const start = performance.now();
+      const dur = 650;
+      function tick(now){
+        const p = Math.min(1,(now-start)/dur);
+        const eased = 1-Math.pow(1-p,3);
+        el.textContent = Math.round(target*eased).toLocaleString('ko-KR') + suffix;
+        if(p<1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+
+  function go(i){
+    index = Math.max(0,Math.min(slides.length-1,i));
+    slides.forEach((s,j)=>s.classList.toggle('active',j===index));
+    navDots.forEach((d,j)=>d.classList.toggle('active',j===index));
+    pageNo.textContent = `${index+1} / ${slides.length}`;
+    progress.style.width = `${(index/(slides.length-1))*100}%`;
+    document.getElementById('prevBtn').disabled = index===0;
+    document.getElementById('nextBtn').disabled = index===slides.length-1;
+    document.getElementById('nextBtn').textContent = index===slides.length-1 ? '완료 ✓' : '다음 →';
+    slides[index].scrollTop = 0;
+    animateCounters(slides[index]);
+  }
+
+  document.getElementById('prevBtn').addEventListener('click',()=>go(index-1));
+  document.getElementById('nextBtn').addEventListener('click',()=>go(index+1));
+
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight' || e.key==='PageDown') {e.preventDefault();go(index+1)}
+    if(e.key==='ArrowLeft' || e.key==='PageUp') {e.preventDefault();go(index-1)}
+    if(e.key==='Home') {e.preventDefault();go(0)}
+    if(e.key==='End') {e.preventDefault();go(slides.length-1)}
+    if(e.key.toLowerCase()==='f'){document.getElementById('fsBtn').click()}
+  });
+
+  let touchX = null;
+  stage.addEventListener('touchstart',e=>touchX=e.changedTouches[0].clientX,{passive:true});
+  stage.addEventListener('touchend',e=>{
+    if(touchX===null) return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>55) go(dx<0?index+1:index-1);
+    touchX=null;
+  },{passive:true});
+
+  document.getElementById('printBtn').addEventListener('click',()=>window.print());
+
+  document.getElementById('fsBtn').addEventListener('click',async()=>{
+    try{
+      if(!document.fullscreenElement) await document.documentElement.requestFullscreen();
+      else await document.exitFullscreen();
+    }catch(err){}
+  });
+
+  const topBtn = document.getElementById('topBtn');
+  slides.forEach(slide=>{
+    slide.addEventListener('scroll',()=>topBtn.classList.toggle('show',slide.scrollTop>250));
+  });
+  topBtn.addEventListener('click',()=>slides[index].scrollTo({top:0,behavior:'smooth'}));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq button').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const faq=btn.parentElement;
+      faq.classList.toggle('open');
+    });
+  });
+
+  // FAQ search
+  const faqSearch=document.getElementById('faqSearch');
+  const faqItems=[...document.querySelectorAll('.faq')];
+  const faqCount=document.getElementById('faqCount');
+  faqSearch.addEventListener('input',()=>{
+    const q=faqSearch.value.trim().toLowerCase();
+    let count=0;
+    faqItems.forEach(item=>{
+      const t=item.textContent.toLowerCase();
+      const show=t.includes(q);
+      item.style.display=show?'':'none';
+      if(show) count++;
+    });
+    faqCount.textContent=`${count}개 질문`;
+  });
+
+  // initialize
+  go(0);
+
+  // Add dynamic glow cursor on desktop
+  if(window.matchMedia('(pointer:fine)').matches){
+    document.addEventListener('pointermove',e=>{
+      document.documentElement.style.setProperty('--mx',e.clientX+'px');
+      document.documentElement.style.setProperty('--my',e.clientY+'px');
+    });
+  }
+})();
+</script>
+</body>
+</html>
