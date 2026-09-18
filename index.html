@@ -261,6 +261,29 @@
       flex-wrap: wrap;
       margin-top: 12px;
     }
+    .sidebar-contact {
+      margin-top: 10px;
+      padding: 13px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(85, 227, 198, 0.18);
+      background: rgba(85, 227, 198, 0.06);
+    }
+    .sidebar-contact span {
+      display: block;
+      color: var(--accent-2);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+    }
+    .sidebar-contact a {
+      display: block;
+      margin-top: 6px;
+      color: #d8fff7;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
 
     .main {
       min-width: 0;
@@ -890,6 +913,50 @@
       font-size: 13px;
       line-height: 1.7;
     }
+    .contact-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .mobile-contact { display: none; }
+    .contact-card .eyebrow {
+      margin-bottom: 10px;
+    }
+    .contact-card h2 {
+      margin: 0;
+      font-size: clamp(20px, 2.4vw, 28px);
+      line-height: 1.25;
+      letter-spacing: -0.04em;
+    }
+    .contact-card p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .contact-link {
+      flex: 0 1 340px;
+      min-width: 0;
+      padding: 15px 18px;
+      border: 1px solid rgba(85, 227, 198, 0.26);
+      border-radius: 16px;
+      background: rgba(85, 227, 198, 0.08);
+      color: #d8fff7;
+      font-weight: 800;
+      font-size: clamp(14px, 1.8vw, 16px);
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+      text-align: center;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+    .contact-link:hover,
+    .contact-link:focus-visible {
+      background: rgba(85, 227, 198, 0.16);
+      border-color: rgba(85, 227, 198, 0.5);
+      outline: none;
+      transform: translateY(-2px);
+    }
     .memory {
       padding: 18px;
       border-radius: 22px;
@@ -1010,6 +1077,14 @@
       .footer-grid {
         grid-template-columns: 1fr;
       }
+      .contact-card {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .contact-link {
+        width: 100%;
+        flex-basis: auto;
+      }
       .steps.steps--row {
         grid-template-columns: repeat(4, minmax(0, 1fr));
       }
@@ -1036,6 +1111,7 @@
       .top-meta .chip { display: none; }
       .actions .icon-btn { width: 40px; height: 40px; border-radius: 13px; }
       .sidebar { display: none; }
+      .mobile-contact { display: flex; }
       .mobile-nav { display: flex; }
       .section-head {
         flex-direction: column;
@@ -1221,6 +1297,10 @@
         <div class="sidebar-card">
           <strong>주요내용</strong>
           <p>강의인지, 사례금이 있는지,국가·지자체 요청인지, 월 횟수·시간을 넘는지, 초과사례금이 있는지 순서대로 확인하세요.</p>
+        </div>
+        <div class="sidebar-contact">
+          <span>CONTACT</span>
+          <a href="mailto:odw0902@korea.kr">양산시 오대웅 (odw0902@korea.kr)</a>
         </div>
       </aside>
 
@@ -1579,6 +1659,15 @@
             <p>인재개발원 강사수당 기준은 기관이 지급할 때 적용하는 기준이고, 청탁금지법은 공직자가 받을 수 있는 법정 상한입니다. 같은 숫자로 보지 말고 반드시 분리해서 이해하세요.</p>
           </div> -->
         </section>
+
+        <footer class="footer-card contact-card mobile-contact" aria-label="문의처">
+          <div>
+            <span class="eyebrow">CONTACT</span>
+            <h2>문의 및 의견</h2>
+            <p>가이드 내용에 관한 문의는 아래 담당자에게 연락해 주세요.</p>
+          </div>
+          <a class="contact-link" href="mailto:odw0902@korea.kr">양산시 오대웅<br />odw0902@korea.kr</a>
+        </footer>
       </main>
     </div>
   </div>
