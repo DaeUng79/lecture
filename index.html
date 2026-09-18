@@ -656,6 +656,96 @@
       font-size: 13px;
       line-height: 1.7;
     }
+    .rate-table-wrap {
+      margin-top: 10px;
+    }
+    .rate-table {
+      min-width: 0;
+      display: grid;
+      gap: 8px;
+    }
+    .rate-row {
+      display: grid;
+      grid-template-columns: minmax(56px, 0.65fr) minmax(80px, 0.9fr) minmax(84px, 0.95fr) minmax(0, 2fr);
+      gap: 8px;
+    }
+    .rate-row > div {
+      padding: 12px 9px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      font-size: 13px;
+      line-height: 1.5;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+    .rate-row.rate-head > div {
+      background: rgba(116, 168, 255, 0.12);
+      border-color: rgba(116, 168, 255, 0.18);
+      color: #dfeaff;
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+    .rate-row .tier {
+      font-weight: 800;
+      color: #f4f8ff;
+    }
+    .rate-row .amount {
+      color: #dce8ff;
+      font-weight: 800;
+      white-space: nowrap;
+      text-align: center;
+    }
+    .rate-note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+    .split-callout {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .split-callout .callout {
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .split-callout .callout strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+    .split-callout .callout span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .example-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .example-grid .example {
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .example-grid .example strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+    .example-grid .example span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
 
     .metrics {
       display: grid;
@@ -865,13 +955,17 @@
       z-index: 32;
       display: none;
       gap: 8px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
       padding: 10px 10px calc(10px + var(--safe-bottom));
       border-top: 1px solid var(--line);
       background: linear-gradient(180deg, rgba(8, 17, 31, 0.70), rgba(8, 17, 31, 0.96));
       backdrop-filter: blur(16px);
     }
+    .mobile-nav::-webkit-scrollbar { display: none; }
     .mobile-nav button {
-      flex: 1 1 0;
+      flex: 0 0 96px;
       min-width: 0;
       border: 1px solid var(--line);
       background: rgba(255, 255, 255, 0.04);
@@ -972,6 +1066,21 @@
       .memory .counter--metric { --counter-size: clamp(30px, 12vw, 48px); }
       .metric .value { --metric-size: clamp(28px, 9.5vw, 44px); }
       .memory .big { --memory-size: clamp(28px, 10vw, 46px); }
+      .rate-table {
+        gap: 6px;
+      }
+      .rate-row {
+        gap: 6px;
+        grid-template-columns: minmax(48px, 0.65fr) minmax(72px, 0.9fr) minmax(76px, 0.95fr) minmax(0, 1.9fr);
+      }
+      .rate-row > div {
+        padding: 10px 8px;
+        font-size: 12px;
+        line-height: 1.45;
+      }
+      .rate-row.rate-head > div {
+        font-size: 11px;
+      }
       details.faq summary { padding: 14px 14px; font-size: 14px; }
       details.faq .answer { padding: 0 14px 14px; }
     }
@@ -992,6 +1101,17 @@
       .mini {
         padding: 14px;
         min-height: 96px;
+      }
+      .rate-row {
+        grid-template-columns: minmax(44px, 0.6fr) minmax(66px, 0.85fr) minmax(70px, 0.9fr) minmax(0, 1.85fr);
+        gap: 5px;
+      }
+      .rate-row > div {
+        padding: 9px 7px;
+        font-size: 11px;
+      }
+      .rate-row.rate-head > div {
+        font-size: 10px;
       }
       .status-panel .mini strong { font-size: clamp(26px, 9vw, 34px); }
       .status-panel .mini:nth-child(2) strong { font-size: clamp(22px, 6.5vw, 28px); }
@@ -1096,7 +1216,7 @@
           <a class="nav-link" href="#limits"><span>사례금 상한</span><small>04</small></a>
           <a class="nav-link" href="#excess"><span>초과사례금</span><small>05</small></a>
           <a class="nav-link" href="#forms"><span>FAQ</span><small>06</small></a>
-          <!-- <a class="nav-link" href="#final"><span>최종 체크</span><small>07</small></a> -->
+          <a class="nav-link" href="#tuition"><span>강사료 산정기준</span><small>07</small></a>
         </nav>
         <div class="sidebar-card">
           <strong>주요내용</strong>
@@ -1255,14 +1375,14 @@
               <p>대가를 받는 외부강의 시간</p>
             </div>
             <div class="card">
-              <strong>1시간 상한</strong>
+              <strong>청탁금지법 1시간 상한</strong>
               <p><span class="counter counter--card" data-target="40" data-suffix="만원">0만원</span></p>
-              <p>대가를 받는 외부강의 상한액</p>
+              <p>공직자가 받을 수 있는 상한액</p>
             </div>
             <div class="card">
-              <strong>총액 상한</strong>
+              <strong>청탁금지법 총액 상한</strong>
               <p><span class="counter counter--card" data-target="60" data-suffix="만원">0만원</span></p>
-              <p>1시간 초과 1일 상한액</p>
+              <p>1시간 초과 시 총액 한도</p>
             </div>
           </div>
 
@@ -1276,7 +1396,7 @@
               </div>
             </div>
             <div class="card">
-              <strong>사례금 상한</strong>
+              <strong>사례금 상한 / 예외</strong>
               <div class="checklist">
                 <div class="check"><div class="bullet"></div><div><strong>강의료·원고료·출연료</strong><span>외부강의등과 관련해 받은 일체의 대가</span></div></div>
                 <div class="check"><div class="bullet"></div><div><strong>여비 실비</strong><span>요청기관에서 여비를 받지 못한 경우, 소속기관에서 실비 별도 청구가능.</span></div></div>
@@ -1289,7 +1409,7 @@
         <section class="section-card section-anchor" id="excess">
           <div class="section-head">
             <div>
-              <p class="eyebrow">04 / 초과사례금</p>
+              <p class="eyebrow">05 / 초과사례금</p>
               <h2 class="section-title">초과사례금을 받았다면 <mark> 2일 이내 즉시 처리</mark></h2>
             </div>
             <p>받은 사실을 알게 된 뒤의 속도가 중요합니다.</p>
@@ -1298,10 +1418,14 @@
           <div class="card" style="margin-top: 14px;">
             <strong>처리 순서</strong>
             <div class="steps steps--row">
-              <div class="step"><div class="no">1</div><strong>확인</strong><p>초과금액을 </br> 받은 사실을 알게 된 시점</p></div>
-              <div class="step"><div class="no">2</div><strong>2일 이내 신고</strong><p>행동강령책임관에게 </br> 서면 신고</p></div>
-              <div class="step"><div class="no">3</div><strong>반환</strong><p>초과금액을 </br> 제공자에게 지체 없이 반환</p></div>
-              <div class="step"><div class="no">4</div><strong>증빙 보관</strong><p>반환 사실과 증빙자료 제출</p></div>
+              <div class="step"><div class="no">1</div><strong>확인</strong><p>초과금액이 있는지 받은 사실을 알게 된 시점부터 봅니다.</p></div>
+              <div class="step"><div class="no">2</div><strong>2일 이내 신고</strong><p>행동강령책임관에게 서면 신고합니다.</p></div>
+              <div class="step"><div class="no">3</div><strong>반환</strong><p>초과금액을 제공자에게 지체 없이 반환합니다.</p></div>
+              <div class="step"><div class="no">4</div><strong>증빙 보관</strong><p>반환 사실과 증빙자료를 정리해 둡니다.</p></div>
+            </div>
+            <div class="method-block method-block--wide">
+              <strong>처리절차</strong>
+              <p>초과사례금을 알게 된 뒤에는 2일 이내 신고하고, 초과금액은 바로 반환한 뒤 증빙을 정리해 둡니다.</p>
             </div>
           </div>
 
@@ -1317,7 +1441,7 @@
         <section class="section-card section-anchor" id="forms">
           <div class="section-head">
             <div>
-              <p class="eyebrow">05 / FAQ</p>
+              <p class="eyebrow">06 / FAQ</p>
               <h2 class="section-title">외부강의 신고 <mark>자주 묻는 질문</mark></h2>
             </div>
             <p>2026년 9월기준 주요질의 응답입니다.</p>
@@ -1372,39 +1496,89 @@
           </div>
         </section>
 
-        <!-- <section class="footer-card section-anchor" id="final">
-          <div class="footer-grid">
+        <section class="section-card section-anchor" id="tuition">
+          <div class="section-head">
             <div>
-              <p class="eyebrow">06 / FINAL CHECK</p>
-              <h2 class="display">출강 직전, <mark>5가지만</mark> 다시 보면 안전합니다.</h2>
-              <div class="checklist" style="margin-top: 16px;">
-                <div class="check"><div class="bullet"></div><div><strong>1. 외부강의등인가?</strong><span>직무 관련성, 요청 여부, 전달 형태를 함께 확인합니다.</span></div></div>
-                <div class="check"><div class="bullet"></div><div><strong>2. 사례금이 있는가?</strong><span>없으면 신고의무가 없는지 먼저 봅니다.</span></div></div>
-                <div class="check"><div class="bullet"></div><div><strong>3. 요청기관이 국가·지자체인가?</strong><span>신고 제외 여부와 상한 규정을 분리해 확인합니다.</span></div></div>
-                <div class="check"><div class="bullet"></div><div><strong>4. 월 3회·6시간을 넘는가?</strong><span>초과 시 사전 승인 여부를 확인합니다.</span></div></div>
-                <div class="check"><div class="bullet"></div><div><strong>5. 초과사례금은 없는가?</strong><span>있다면 2일 내 신고와 반환 절차로 전환합니다.</span></div></div>
-              </div>
+              <p class="eyebrow">07 / 강사료 산정기준</p>
+              <h2 class="section-title">지방자치인재개발원 <mark>강사료 산정기준</mark></h2>
             </div>
-            <div class="memory">
-              <strong>빠른 기억법</strong>
-              <div class="big"><span class="counter counter--metric" data-target="10" data-suffix="일">0일</span></div>
-              <p>기본 신고 시한</p>
-              <div style="height: 1px; background: rgba(255,255,255,0.14); margin: 16px 0;"></div>
-              <div class="grid two">
-                <div>
-                  <strong style="margin:0 0 6px;">40만원</strong>
-                  <p style="margin:0;">1시간 상한</p>
+            <p>기관 지급기준과 법정 상한은 서로 다른 기준입니다.</p>
+          </div>
+
+          <div class="card">
+            <strong>2026년 지방자치인재개발원 강사수당 기준</strong>
+            <div class="rate-table-wrap" aria-label="강사수당 기준 표">
+              <div class="rate-table">
+                <div class="rate-row rate-head">
+                  <div>자격</div>
+                  <div>최초 1시간</div>
+                  <div>초과 매시간</div>
+                  <div>주요 대상</div>
                 </div>
-                <div>
-                  <strong style="margin:0 0 6px;">2일</strong>
-                  <p style="margin:0;">초과사례금 신고</p>
+                <div class="rate-row">
+                  <div class="tier">특1급</div>
+                  <div class="amount">40만원</div>
+                  <div class="amount">30만원*</div>
+                  <div>전직 장관급, 대학총장, 전직 국회의원·광역단체장, 대기업 회장 등</div>
+                </div>
+                <div class="rate-row">
+                  <div class="tier">특2급</div>
+                  <div class="amount">30만원</div>
+                  <div class="amount">20만원</div>
+                  <div>전직 차관급, 전직 공기업 대표, 전직 기초단체장 등</div>
+                </div>
+                <div class="rate-row">
+                  <div class="tier">1급</div>
+                  <div class="amount">25만원</div>
+                  <div class="amount">12만원</div>
+                  <div>전직 4급 이상 공무원, 교수, 기관 임원, 일정 경력 전문자격자 등</div>
+                </div>
+                <div class="rate-row">
+                  <div class="tier">2급</div>
+                  <div class="amount">15만원</div>
+                  <div class="amount">8만원</div>
+                  <div>5급 이하 공무원, 대학 강사, 기관 부장급, 일정 경력 전문자격자 등</div>
+                </div>
+                <div class="rate-row">
+                  <div class="tier">3급</div>
+                  <div class="amount">10만원</div>
+                  <div class="amount">5만원</div>
+                  <div>전산·외국어 강사, 일정 경력 취미·소양 강사 등</div>
+                </div>
+                <div class="rate-row">
+                  <div class="tier">4급</div>
+                  <div class="amount">8만원</div>
+                  <div class="amount">4만원</div>
+                  <div>취미·소양·체육 등 강사</div>
+                </div>
+                <div class="rate-row">
+                  <div class="tier">5급</div>
+                  <div class="amount">6만원</div>
+                  <div class="amount">3만원</div>
+                  <div>실기·실습 보조강사</div>
                 </div>
               </div>
-              <p>불확실하면 행동강령책임관 또는 감사부서에 먼저 확인하는 것이 가장 안전합니다.</p>
             </div>
           </div>
-          <p class="footer-note">외부강의등 신고안내 · 지방 공직자 실무 참고용 · 실제 적용은 현행 법령과 기관 내부 규정을 우선 확인하세요.</p>
-        </section> -->
+
+          <div class="card" style="margin-top: 14px;">
+            <!-- <strong>꼭 구분할 것</strong> -->
+            <div class="split-callout">
+              <div class="callout">
+                <strong>강의 요청기관 지급기준</strong>
+                <span>지방자치인재개발원 기준은 강사수당을 지급할 때 기관이 준용할 수 있는 단가입니다.</span>
+              </div>
+              <div class="callout">
+                <strong>강사료 청탁금지법 상한</strong>
+                <span>청탁금지법은 공직자가 받을 수 있는 최대 상한을 정합니다. 현재 시간당 40만원, 1시간 초과 시 총액 60만원을 초과할 수 없습니다.</span>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="method-block method-block--wide" style="margin-top: 14px;">
+            <strong>정리 문장</strong>
+            <p>인재개발원 강사수당 기준은 기관이 지급할 때 적용하는 기준이고, 청탁금지법은 공직자가 받을 수 있는 법정 상한입니다. 같은 숫자로 보지 말고 반드시 분리해서 이해하세요.</p>
+          </div> -->
+        </section>
       </main>
     </div>
   </div>
@@ -1416,14 +1590,14 @@
     <button type="button" data-jump="#report"><span>신고</span><strong>기준</strong></button>
     <button type="button" data-jump="#limits"><span>상한</span><strong>금액</strong></button>
     <button type="button" data-jump="#forms"><span>FAQ</span><strong>서식</strong></button>
-    <!-- <button type="button" data-jump="#final"><span>체크</span><strong>마무리</strong></button> -->
+    <button type="button" data-jump="#tuition"><span>강사료</span><strong>기준</strong></button>
   </div>
 
   <button class="float-top" id="floatTop" type="button" title="맨 위로">↑</button>
 
   <script>
     (() => {
-      const sectionIds = ["overview", "check", "report", "limits", "excess", "forms", "final"];
+      const sectionIds = ["overview", "check", "report", "limits", "excess", "forms", "tuition"];
       const sections = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
       const sideLinks = [...document.querySelectorAll(".nav-link")];
       const jumps = [...document.querySelectorAll("[data-jump]")];
